@@ -1,5 +1,3 @@
-# Try to use PyMySQL as MySQLdb (easier installation)
-try:
 # MySQL support (for local development only)
 # Uncomment if using MySQL locally:
 # try:
@@ -7,7 +5,3 @@ try:
 #     pymysql.install_as_MySQLdb()
 # except ImportError:
 #     pass
-except ImportError:
-    # mysqlclient is installed, use that instead
-    pass
-
