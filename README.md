@@ -52,7 +52,7 @@ npm run dev
 
 ## Deployment
 
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions to Vercel (Frontend) and Render (Backend).
+See [RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md) for detailed deployment instructions to Vercel (Frontend) and Railway (Backend).
 
 ## Project Structure
 
