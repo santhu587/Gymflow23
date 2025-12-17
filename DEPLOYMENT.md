@@ -22,39 +22,41 @@ git add .
 git commit -m "Initial commit - GymFlow MVP"
 
 # Add remote (replace with your repo URL)
-git remote add origin https://github.com/santhu587/Gymflow.git
+git remote add origin https://github.com/santhu587/Gymflow23.git
 
 # Push to main branch
 git branch -M main
 git push -u origin main
 ```
 
-## Step 2: Create PostgreSQL Database First (IMPORTANT!)
+## Step 2: Create MySQL Database First (IMPORTANT!)
 
 **⚠️ You MUST create the database BEFORE creating the web service!**
 
 1. **Go to [Render Dashboard](https://dashboard.render.com/)**
 2. **Click "New +" button** at the top right
-3. **Select "PostgreSQL"** from the dropdown (NOT "Web Service")
-   - If you don't see "PostgreSQL", make sure you're clicking "New +" at the dashboard level
+3. **Select "MySQL"** from the dropdown (NOT "Web Service")
+   - If you don't see "MySQL", make sure you're clicking "New +" at the dashboard level
+   - Note: Render may not have MySQL, in which case use PostgreSQL and update DATABASE_URL format
 4. **Configure the database:**
    - **Name:** `gymflow-db`
-   - **Database:** `gymflow`
+   - **Database:** `gym_management`
    - **User:** `gymflow_user` (or leave default)
    - **Region:** Choose closest to you
    - **Plan:** Free (for testing) or Starter ($7/month for production)
 5. **Click "Create Database"**
 6. **Wait for provisioning** (1-2 minutes)
 7. **Once ready**, go to the database dashboard
-8. **Copy the "Internal Database URL"** (looks like: `postgresql://user:pass@host:5432/dbname`)
+8. **Copy the "Internal Database URL"** (looks like: `mysql://user:pass@host:3306/dbname`)
    - Keep this URL safe - you'll need it in the next step!
+   - **Note:** If using PostgreSQL, URL format is `postgresql://user:pass@host:5432/dbname`
 
 ## Step 3: Deploy Backend to Render
 
 1. **Go to [Render Dashboard](https://dashboard.render.com/)**
 2. **Click "New +" → "Web Service"**
 3. **Connect your GitHub repository:**
-   - Select: `santhu587/Gymflow`
+   - Select: `santhu587/Gymflow23`
    - Branch: `main`
 4. **Configure the service:**
    - **Name:** `gymflow-backend`
@@ -83,7 +85,9 @@ git push -u origin main
    **Variable 4: DATABASE_URL** ⭐ (IMPORTANT!)
    - Key: `DATABASE_URL`
    - Value: Paste the **Internal Database URL** you copied from Step 2
-   - Should look like: `postgresql://user:password@hostname:5432/dbname`
+   - For MySQL: `mysql://user:password@hostname:3306/dbname`
+   - For PostgreSQL: `postgresql://user:password@hostname:5432/dbname`
+   - Render will auto-detect the database type from the URL
    
    **Variable 5: CORS_ALLOWED_ORIGINS**
    - Key: `CORS_ALLOWED_ORIGINS`
