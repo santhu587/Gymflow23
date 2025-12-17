@@ -8,14 +8,24 @@
 
 ## 📦 Step 2: Backend Deployment (Render)
 
-### 2.1 Create Database First
+### 2.1 Use Existing Database (or Create New)
+**Option A: Reuse Existing PostgreSQL Database** ⭐ (Recommended if you have one)
 1. Go to: https://dashboard.render.com/
-2. Click **"New +"** → **"PostgreSQL"** (or MySQL if available)
+2. Find your **existing PostgreSQL database** in the dashboard
+3. Click on it to open
+4. Go to **"Info"** or **"Connections"** tab
+5. **Copy the "Internal Database URL"** (looks like: `postgresql://user:pass@host:5432/dbname`)
+   - This is the URL you'll use in Step 2.2
+6. **Note:** If you need a different database name, you can create a new database inside the existing PostgreSQL instance using the Shell tab
+
+**Option B: Create New Database** (Only if you don't have one)
+1. Go to: https://dashboard.render.com/
+2. Click **"New +"** → **"PostgreSQL"**
 3. Configure:
    - **Name:** `gymflow-db`
    - **Database:** `gym_management`
    - **Region:** Choose closest
-   - **Plan:** Free (for testing)
+   - **Plan:** Free (for testing) - **Note:** Only 1 free database allowed per account
 4. Click **"Create Database"**
 5. Wait 1-2 minutes
 6. **Copy the "Internal Database URL"** (save it!)

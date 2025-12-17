@@ -29,27 +29,41 @@ git branch -M main
 git push -u origin main
 ```
 
-## Step 2: Create MySQL Database First (IMPORTANT!)
+## Step 2: Use Existing PostgreSQL Database (or Create New)
 
-**⚠️ You MUST create the database BEFORE creating the web service!**
+**⚠️ IMPORTANT:** Render allows only **1 free tier database** per account. If you already have one, reuse it!
+
+### Option A: Reuse Existing PostgreSQL Database ⭐ (Recommended)
+
+1. **Go to [Render Dashboard](https://dashboard.render.com/)**
+2. **Find your existing PostgreSQL database** in the services list
+3. **Click on it** to open the database dashboard
+4. **Go to "Info" or "Connections" tab**
+5. **Copy the "Internal Database URL"** 
+   - Format: `postgresql://user:password@hostname:5432/dbname`
+   - Keep this URL safe - you'll use it in Step 3!
+6. **Optional:** If you need a new database name, you can:
+   - Use the existing database (recommended)
+   - Or create a new database inside the same PostgreSQL instance using the Shell tab
+
+### Option B: Create New Database (Only if you don't have one)
 
 1. **Go to [Render Dashboard](https://dashboard.render.com/)**
 2. **Click "New +" button** at the top right
-3. **Select "MySQL"** from the dropdown (NOT "Web Service")
-   - If you don't see "MySQL", make sure you're clicking "New +" at the dashboard level
-   - Note: Render may not have MySQL, in which case use PostgreSQL and update DATABASE_URL format
+3. **Select "PostgreSQL"** from the dropdown (NOT "Web Service")
+   - If you don't see "PostgreSQL", make sure you're clicking "New +" at the dashboard level
 4. **Configure the database:**
    - **Name:** `gymflow-db`
    - **Database:** `gym_management`
    - **User:** `gymflow_user` (or leave default)
    - **Region:** Choose closest to you
    - **Plan:** Free (for testing) or Starter ($7/month for production)
+   - **⚠️ Note:** Only 1 free database allowed per account!
 5. **Click "Create Database"**
 6. **Wait for provisioning** (1-2 minutes)
 7. **Once ready**, go to the database dashboard
-8. **Copy the "Internal Database URL"** (looks like: `mysql://user:pass@host:3306/dbname`)
+8. **Copy the "Internal Database URL"** (looks like: `postgresql://user:pass@host:5432/dbname`)
    - Keep this URL safe - you'll need it in the next step!
-   - **Note:** If using PostgreSQL, URL format is `postgresql://user:pass@host:5432/dbname`
 
 ## Step 3: Deploy Backend to Render
 
