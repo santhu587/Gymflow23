@@ -216,8 +216,8 @@ export default function Register() {
         </form>
 
         {/* Footer Credit */}
-        <div className="mt-12 pt-8 border-t border-gray-200 text-center">
-          <div className="flex items-center justify-center space-x-2">
+        <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200 text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
             <p className="apple-body text-xs text-gray-400">Design & Development by</p>
             <a
               href="https://sansatechsolution.com"

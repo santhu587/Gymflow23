@@ -216,10 +216,10 @@ export default function Trainers() {
   }
 
   return (
-    <div className="space-y-8" style={{ color: '#1d1d1f' }}>
+    <div className="space-y-6 sm:space-y-8" style={{ color: '#1d1d1f' }}>
       <div>
-        <h1 className="apple-hero mb-2">Trainers</h1>
-        <p className="apple-subhead">Manage trainers and their payments</p>
+        <h1 className="apple-hero mb-2 text-2xl sm:text-3xl">Trainers</h1>
+        <p className="apple-subhead text-sm sm:text-base">Manage trainers and their payments</p>
       </div>
 
       {error && (
@@ -233,7 +233,7 @@ export default function Trainers() {
         <div className="space-y-6">
           <div className="bento-card p-6">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="apple-headline text-2xl">Trainers</h2>
+              <h2 className="apple-headline text-xl sm:text-2xl">Trainers</h2>
               <button
                 onClick={resetTrainerForm}
                 className="apple-button apple-button-secondary text-sm"

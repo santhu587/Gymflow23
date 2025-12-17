@@ -117,10 +117,10 @@ export default function MemberForm() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto" style={{ color: '#1d1d1f' }}>
-      <div className="mb-8">
-        <h1 className="apple-hero mb-2">{id ? 'Edit Member' : 'Add New Member'}</h1>
-        <p className="apple-subhead">Fill in the member details below</p>
+    <div className="max-w-2xl mx-auto px-4 sm:px-0" style={{ color: '#1d1d1f' }}>
+      <div className="mb-6 sm:mb-8">
+        <h1 className="apple-hero mb-2 text-2xl sm:text-3xl">{id ? 'Edit Member' : 'Add New Member'}</h1>
+        <p className="apple-subhead text-sm sm:text-base">Fill in the member details below</p>
       </div>
 
       {error && (

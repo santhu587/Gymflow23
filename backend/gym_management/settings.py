@@ -78,30 +78,34 @@ WSGI_APPLICATION = 'gym_management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# Database configuration - supports both PostgreSQL (production) and SQLite (development)
+# Database configuration - supports MySQL (production/development) and SQLite (fallback)
 import dj_database_url
 
 DATABASE_URL = config('DATABASE_URL', default=None)
 
 if DATABASE_URL:
-    # Production: Use PostgreSQL from DATABASE_URL (Render, Railway, etc.)
+    # Production: Use MySQL from DATABASE_URL (Render, Railway, etc.)
     DATABASES = {
         'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
     }
-elif config('USE_POSTGRES', default=False, cast=bool):
-    # Development: Use PostgreSQL if explicitly configured
+elif config('USE_MYSQL', default=False, cast=bool):
+    # Development: Use MySQL if explicitly configured
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.mysql',
             'NAME': config('DB_NAME', default='gym_management'),
-            'USER': config('DB_USER', default='postgres'),
-            'PASSWORD': config('DB_PASSWORD', default='postgres'),
+            'USER': config('DB_USER', default='root'),
+            'PASSWORD': config('DB_PASSWORD', default=''),
             'HOST': config('DB_HOST', default='localhost'),
-            'PORT': config('DB_PORT', default='5432'),
+            'PORT': config('DB_PORT', default='3306'),
+            'OPTIONS': {
+                'charset': 'utf8mb4',
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            },
         }
     }
 else:
-    # Development: Use SQLite
+    # Development: Use SQLite (fallback)
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

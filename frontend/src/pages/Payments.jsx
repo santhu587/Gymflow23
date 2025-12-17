@@ -150,11 +150,11 @@ export default function Payments() {
   }
 
   return (
-    <div className="space-y-8" style={{ color: '#1d1d1f' }}>
-      <div className="flex justify-between items-center">
+    <div className="space-y-6 sm:space-y-8" style={{ color: '#1d1d1f' }}>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="apple-hero mb-2">Payments</h1>
-          <p className="apple-subhead">Record and track member payments</p>
+          <h1 className="apple-hero mb-2 text-2xl sm:text-3xl">Payments</h1>
+          <p className="apple-subhead text-sm sm:text-base">Record and track member payments</p>
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
@@ -295,48 +295,50 @@ export default function Payments() {
 
       {loading ? (
         <div className="flex items-center justify-center h-64">
-          <div className="w-12 h-12 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+          <div className="w-12 h-12 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
         </div>
       ) : (
-        <div className="bento-card overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-white/10">
-                  <th className="apple-body text-left py-4 px-6 text-white/60 font-medium">Member</th>
-                  <th className="apple-body text-left py-4 px-6 text-white/60 font-medium">Amount</th>
-                  <th className="apple-body text-left py-4 px-6 text-white/60 font-medium">Mode</th>
-                  <th className="apple-body text-left py-4 px-6 text-white/60 font-medium">Date</th>
-                </tr>
-              </thead>
-              <tbody ref={tableRef}>
-                {payments.length === 0 ? (
-                  <tr>
-                    <td colSpan="4" className="px-6 py-12 text-center">
-                      <p className="apple-body text-white/40">No payments found</p>
-                    </td>
+        <>
+          {/* Desktop Table View */}
+          <div className="hidden lg:block bento-card overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="apple-body text-left py-3 sm:py-4 px-4 sm:px-6 text-gray-600 font-medium text-sm">Member</th>
+                    <th className="apple-body text-left py-3 sm:py-4 px-4 sm:px-6 text-gray-600 font-medium text-sm">Amount</th>
+                    <th className="apple-body text-left py-3 sm:py-4 px-4 sm:px-6 text-gray-600 font-medium text-sm">Mode</th>
+                    <th className="apple-body text-left py-3 sm:py-4 px-4 sm:px-6 text-gray-600 font-medium text-sm">Date</th>
                   </tr>
-                ) : (
+                </thead>
+                <tbody ref={tableRef}>
+                  {payments.length === 0 ? (
+                    <tr>
+                      <td colSpan="4" className="px-4 sm:px-6 py-8 sm:py-12 text-center">
+                        <p className="apple-body text-gray-500">No payments found</p>
+                      </td>
+                    </tr>
+                  ) : (
                   payments.map((payment) => (
                     <tr
                       key={payment.id}
                       className="border-b border-gray-100 hover:bg-gray-50 transition"
                     >
-                      <td className="px-6 py-4">
-                        <p className="apple-body font-semibold">
+                      <td className="px-4 sm:px-6 py-3 sm:py-4">
+                        <p className="apple-body font-semibold text-sm">
                           {payment.member_name || payment.member_details?.name}
                         </p>
                       </td>
-                      <td className="px-6 py-4">
-                        <p className="apple-body font-semibold">₹{payment.amount.toLocaleString()}</p>
+                      <td className="px-4 sm:px-6 py-3 sm:py-4">
+                        <p className="apple-body font-semibold text-sm">₹{payment.amount.toLocaleString()}</p>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-4 sm:px-6 py-3 sm:py-4">
                         <span className="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
                           {payment.payment_mode}
                         </span>
                       </td>
-                      <td className="px-6 py-4">
-                        <p className="apple-body text-white/60">
+                      <td className="px-4 sm:px-6 py-3 sm:py-4">
+                        <p className="apple-body text-gray-600 text-sm">
                           {format(new Date(payment.payment_date), 'MMM dd, yyyy')}
                         </p>
                       </td>
@@ -346,7 +348,43 @@ export default function Payments() {
               </tbody>
             </table>
           </div>
-        </div>
+          </div>
+
+          {/* Mobile Card View */}
+          <div className="lg:hidden space-y-4">
+            {payments.length === 0 ? (
+              <div className="glass-card rounded-[20px] p-8 text-center">
+                <p className="apple-body text-gray-500">No payments found</p>
+              </div>
+            ) : (
+              payments.map((payment) => (
+                <div
+                  key={payment.id}
+                  className="glass-card rounded-[20px] p-4 sm:p-6 space-y-3"
+                >
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <h3 className="apple-body font-semibold text-base mb-1">
+                        {payment.member_name || payment.member_details?.name}
+                      </h3>
+                      <p className="apple-body text-sm text-gray-600">
+                        {format(new Date(payment.payment_date), 'MMM dd, yyyy')}
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <p className="apple-body font-semibold text-lg text-gray-900">
+                        ₹{payment.amount.toLocaleString()}
+                      </p>
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700 mt-1 inline-block">
+                        {payment.payment_mode}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </>
       )}
     </div>
   )

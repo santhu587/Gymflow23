@@ -52,14 +52,14 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 flex items-center justify-center px-6" style={{ backgroundColor: '#ffffff', minHeight: '100vh' }}>
+    <div className="min-h-screen bg-white text-gray-900 flex items-center justify-center px-4 sm:px-6 py-8 sm:py-0" style={{ backgroundColor: '#ffffff', minHeight: '100vh' }}>
       <div ref={formRef} className="max-w-md w-full" style={{ opacity: 1, visibility: 'visible' }}>
-        <div className="text-center mb-12">
-          <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-50 rounded-[20px] flex items-center justify-center mx-auto mb-6">
-            <span className="text-3xl">💪</span>
+        <div className="text-center mb-8 sm:mb-12">
+          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-100 to-blue-50 rounded-[16px] sm:rounded-[20px] flex items-center justify-center mx-auto mb-4 sm:mb-6">
+            <span className="text-2xl sm:text-3xl">💪</span>
           </div>
-          <h1 className="apple-hero mb-4">Sign In</h1>
-          <p className="apple-subhead">Welcome back to GymFlow</p>
+          <h1 className="apple-hero mb-3 sm:mb-4 text-3xl sm:text-4xl">Sign In</h1>
+          <p className="apple-subhead text-sm sm:text-base">Welcome back to GymFlow</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -120,8 +120,8 @@ export default function Login() {
         </form>
 
         {/* Footer Credit */}
-        <div className="mt-12 pt-8 border-t border-gray-200 text-center">
-          <div className="flex items-center justify-center space-x-2">
+        <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200 text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
             <p className="apple-body text-xs text-gray-400">Design & Development by</p>
             <a
               href="https://sansatechsolution.com"

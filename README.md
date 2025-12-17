@@ -1,4 +1,4 @@
-# GymFlow - Gym Management System
+# Gymflow23 - Gym Management System
 
 A modern, full-stack gym management SaaS application built with Django REST Framework and React.
 

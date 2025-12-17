@@ -101,11 +101,11 @@ export default function Dashboard() {
   if (!stats) return null
 
   return (
-    <div className="space-y-12" style={{ color: '#1d1d1f' }}>
+    <div className="space-y-8 sm:space-y-12" style={{ color: '#1d1d1f' }}>
       {/* Hero Section */}
       <section>
-        <h1 className="apple-hero mb-4">Welcome Back</h1>
-        <p className="apple-subhead">Here's your gym performance overview</p>
+        <h1 className="apple-hero mb-3 sm:mb-4 text-2xl sm:text-3xl">Welcome Back</h1>
+        <p className="apple-subhead text-sm sm:text-base">Here's your gym performance overview</p>
       </section>
 
       {/* Stats Grid - Bento Style */}
@@ -134,9 +134,9 @@ export default function Dashboard() {
       </section>
 
       {/* Revenue & Expiring - Bento Grid */}
-      <section ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bento-card p-8">
-          <h3 className="apple-headline text-2xl mb-6">Revenue Breakdown</h3>
+      <section ref={cardsRef} className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+        <div className="bento-card p-4 sm:p-6 lg:p-8">
+          <h3 className="apple-headline text-xl sm:text-2xl mb-4 sm:mb-6">Revenue Breakdown</h3>
           <div className="space-y-4">
             <RevenueRow
               label="Personal Training"
@@ -159,8 +159,8 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="bento-card p-8">
-          <h3 className="apple-headline text-2xl mb-6">Expiring Soon</h3>
+        <div className="bento-card p-4 sm:p-6 lg:p-8">
+          <h3 className="apple-headline text-xl sm:text-2xl mb-4 sm:mb-6">Expiring Soon</h3>
           {stats.expiring_soon && stats.expiring_soon.length > 0 ? (
             <div className="space-y-3 max-h-80 overflow-y-auto">
               {stats.expiring_soon.map((member) => (
@@ -190,8 +190,8 @@ export default function Dashboard() {
       </section>
 
       {/* Recent Payments */}
-      <section className="bento-card p-8">
-        <h3 className="apple-headline text-2xl mb-6">Recent Payments</h3>
+      <section className="bento-card p-4 sm:p-6 lg:p-8">
+        <h3 className="apple-headline text-xl sm:text-2xl mb-4 sm:mb-6">Recent Payments</h3>
         {stats.recent_payments && stats.recent_payments.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full">

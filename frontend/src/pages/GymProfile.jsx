@@ -121,10 +121,10 @@ export default function GymProfile() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-8" style={{ color: '#1d1d1f' }}>
+    <div className="max-w-2xl mx-auto space-y-6 sm:space-y-8 px-4 sm:px-0" style={{ color: '#1d1d1f' }}>
       <div>
-        <h1 className="apple-hero mb-2">Gym Profile</h1>
-        <p className="apple-subhead">
+        <h1 className="apple-hero mb-2 text-2xl sm:text-3xl">Gym Profile</h1>
+        <p className="apple-subhead text-sm sm:text-base">
           Set up your gym name and location details. This helps keep your records organized.
         </p>
       </div>

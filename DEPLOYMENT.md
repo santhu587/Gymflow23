@@ -29,39 +29,73 @@ git branch -M main
 git push -u origin main
 ```
 
-## Step 2: Deploy Backend to Render
+## Step 2: Create PostgreSQL Database First (IMPORTANT!)
+
+**⚠️ You MUST create the database BEFORE creating the web service!**
+
+1. **Go to [Render Dashboard](https://dashboard.render.com/)**
+2. **Click "New +" button** at the top right
+3. **Select "PostgreSQL"** from the dropdown (NOT "Web Service")
+   - If you don't see "PostgreSQL", make sure you're clicking "New +" at the dashboard level
+4. **Configure the database:**
+   - **Name:** `gymflow-db`
+   - **Database:** `gymflow`
+   - **User:** `gymflow_user` (or leave default)
+   - **Region:** Choose closest to you
+   - **Plan:** Free (for testing) or Starter ($7/month for production)
+5. **Click "Create Database"**
+6. **Wait for provisioning** (1-2 minutes)
+7. **Once ready**, go to the database dashboard
+8. **Copy the "Internal Database URL"** (looks like: `postgresql://user:pass@host:5432/dbname`)
+   - Keep this URL safe - you'll need it in the next step!
+
+## Step 3: Deploy Backend to Render
 
 1. **Go to [Render Dashboard](https://dashboard.render.com/)**
 2. **Click "New +" → "Web Service"**
-3. **Connect your GitHub repository**
+3. **Connect your GitHub repository:**
+   - Select: `santhu587/Gymflow`
+   - Branch: `main`
 4. **Configure the service:**
    - **Name:** `gymflow-backend`
+   - **Root Directory:** `backend` (IMPORTANT!)
    - **Environment:** `Python 3`
    - **Build Command:** `pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate`
    - **Start Command:** `gunicorn gym_management.wsgi:application --bind 0.0.0.0:$PORT`
 
 5. **Add Environment Variables:**
-   ```
-   SECRET_KEY=<generate-a-random-secret-key>
-   DEBUG=False
-   ALLOWED_HOSTS=your-service-name.onrender.com
-   CORS_ALLOWED_ORIGINS=https://your-frontend.vercel.app
-   ```
+   - Scroll down to "Environment Variables" section
+   - Click **"+ Add Environment Variable"** button
+   - Add each variable one by one:
+   
+   **Variable 1: SECRET_KEY**
+   - Key: `SECRET_KEY`
+   - Value: Click "Generate" button (or create a random string)
+   
+   **Variable 2: DEBUG**
+   - Key: `DEBUG`
+   - Value: `False`
+   
+   **Variable 3: ALLOWED_HOSTS**
+   - Key: `ALLOWED_HOSTS`
+   - Value: `gymflow-backend.onrender.com` (or your actual service URL)
+   
+   **Variable 4: DATABASE_URL** ⭐ (IMPORTANT!)
+   - Key: `DATABASE_URL`
+   - Value: Paste the **Internal Database URL** you copied from Step 2
+   - Should look like: `postgresql://user:password@hostname:5432/dbname`
+   
+   **Variable 5: CORS_ALLOWED_ORIGINS**
+   - Key: `CORS_ALLOWED_ORIGINS`
+   - Value: `https://your-frontend.vercel.app` (update after deploying frontend)
+   
+   - Click **"Save Changes"** after adding all variables
 
-6. **Add PostgreSQL Database:**
-   - Click "New +" → "PostgreSQL"
-   - Name: `gymflow-db`
-   - Copy the **Internal Database URL**
-   - Add to environment variables:
-     ```
-     DATABASE_URL=<internal-database-url-from-render>
-     ```
+6. **Click "Create Web Service"**
+7. **Wait for deployment to complete** (3-5 minutes)
+8. **Copy your backend URL** (e.g., `https://gymflow-backend.onrender.com`)
 
-7. **Click "Create Web Service"**
-8. **Wait for deployment to complete**
-9. **Copy your backend URL** (e.g., `https://gymflow-backend.onrender.com`)
-
-## Step 3: Deploy Frontend to Vercel
+## Step 4: Deploy Frontend to Vercel
 
 1. **Go to [Vercel Dashboard](https://vercel.com/dashboard)**
 2. **Click "Add New..." → "Project"**
@@ -82,7 +116,7 @@ git push -u origin main
 7. **Wait for deployment to complete**
 8. **Copy your frontend URL** (e.g., `https://gymflow.vercel.app`)
 
-## Step 4: Update CORS Settings
+## Step 5: Update CORS Settings
 
 1. **Go back to Render Dashboard**
 2. **Edit your backend service**
@@ -94,7 +128,7 @@ git push -u origin main
 
 4. **Save and redeploy**
 
-## Step 5: Create Superuser (Optional)
+## Step 6: Create Superuser (Optional)
 
 1. **In Render Dashboard, go to your backend service**
 2. **Click "Shell" tab**
@@ -104,7 +138,7 @@ git push -u origin main
    ```
 4. **Follow prompts to create admin user**
 
-## Step 6: Test Deployment
+## Step 7: Test Deployment
 
 1. Visit your Vercel frontend URL
 2. Try registering a new account
