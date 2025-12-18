@@ -78,13 +78,13 @@ WSGI_APPLICATION = 'gym_management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# Database configuration - supports MySQL (production/development) and SQLite (fallback)
+# Database configuration - supports PostgreSQL (via DATABASE_URL), MySQL (local dev), and SQLite (fallback)
 import dj_database_url
 
 DATABASE_URL = config('DATABASE_URL', default=None)
 
 if DATABASE_URL:
-    # Production: Use MySQL from DATABASE_URL (Render, Railway, etc.)
+    # Production: Use PostgreSQL/MySQL from DATABASE_URL (Render, Railway, Supabase, Neon, etc.)
     DATABASES = {
         'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
     }

@@ -52,7 +52,17 @@ npm run dev
 
 ## Deployment
 
-See [RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md) for detailed deployment instructions to Vercel (Frontend) and Railway (Backend).
+### Option 1: Render + Supabase/Neon (Recommended)
+See [RENDER_SUPABASE_DEPLOYMENT.md](./RENDER_SUPABASE_DEPLOYMENT.md) for detailed deployment instructions:
+- **Frontend:** Vercel
+- **Backend:** Render
+- **Database:** Supabase PostgreSQL or Neon PostgreSQL
+
+### Option 2: Railway
+See [RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md) for detailed deployment instructions:
+- **Frontend:** Vercel
+- **Backend:** Railway
+- **Database:** Railway PostgreSQL
 
 ## Project Structure
 
