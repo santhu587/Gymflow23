@@ -48,6 +48,8 @@ The database password was set when you **created the Supabase project**:
 
 **If you remember the password:**
 - Use that password to replace `[YOUR-PASSWORD]` in the connection string
+- **Important:** Supabase shows `[YOUR-PASSWORD]` as a placeholder - you need to **manually replace it** when you copy the string
+- See detailed instructions: `HOW_TO_REPLACE_PASSWORD.md`
 
 **If you forgot the password:**
 - You need to **reset it** (see below)
