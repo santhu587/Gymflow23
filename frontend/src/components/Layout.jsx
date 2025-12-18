@@ -123,16 +123,10 @@ export default function Layout() {
       {/* Footer */}
       <footer className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-2 sm:py-3 px-4 sm:px-6 z-40">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 text-center">
-            <p className="apple-body text-xs text-gray-400">Design & Development by</p>
-            <a
-              href="https://sansatechsolution.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="apple-body text-xs text-blue-600 hover:text-blue-700 transition-colors font-medium"
-            >
-              SansaTechSolution.com
-            </a>
+          <div className="flex items-center justify-center text-center">
+            <p className="apple-body text-xs text-gray-500">
+              Design and Developed by <span className="font-medium text-gray-700">Santhosh Chandra</span>
+            </p>
           </div>
         </div>
       </footer>

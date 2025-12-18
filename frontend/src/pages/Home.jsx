@@ -257,16 +257,10 @@ export default function Home() {
             <p className="apple-body text-gray-500 text-sm sm:text-base">
               &copy; 2025 GymFlow. All rights reserved.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
-              <p className="apple-body text-xs sm:text-sm text-gray-400">Design & Development by</p>
-              <a
-                href="https://sansatechsolution.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="apple-body text-xs sm:text-sm text-blue-600 hover:text-blue-700 transition-colors font-medium"
-              >
-                SansaTechSolution.com
-              </a>
+            <div className="flex items-center justify-center">
+              <p className="apple-body text-xs sm:text-sm text-gray-500">
+                Design and Developed by <span className="font-medium text-gray-700">Santhosh Chandra</span>
+              </p>
             </div>
           </div>
         </div>
