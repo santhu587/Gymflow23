@@ -85,4 +85,4 @@ GyTech/
 
 Copyright © 2025 GymFlow. All rights reserved.
 
-**Design & Development by [SansaTechSolution.com](https://sansatechsolution.com)**
+**Design and Developed by Santhosh Chandra**

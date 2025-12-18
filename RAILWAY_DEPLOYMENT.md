@@ -193,5 +193,5 @@ VITE_API_URL=https://your-backend.railway.app
 
 ---
 
-**Design & Development by [SansaTechSolution.com](https://sansatechsolution.com)**
+**Design and Developed by Santhosh Chandra**
 
