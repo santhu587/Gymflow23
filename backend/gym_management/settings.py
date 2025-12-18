@@ -85,8 +85,13 @@ DATABASE_URL = config('DATABASE_URL', default=None)
 
 if DATABASE_URL:
     # Production: Use PostgreSQL/MySQL from DATABASE_URL (Render, Railway, Supabase, Neon, etc.)
+    db_config = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+    # Optimize connection pool settings for better performance
+    db_config['CONN_MAX_AGE'] = 600  # Keep connections alive for 10 minutes
+    db_config['OPTIONS'] = db_config.get('OPTIONS', {})
+    db_config['OPTIONS']['connect_timeout'] = 10  # 10 second connection timeout
     DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+        'default': db_config
     }
 elif config('USE_MYSQL', default=False, cast=bool):
     # Development: Use MySQL if explicitly configured

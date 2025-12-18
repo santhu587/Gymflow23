@@ -43,9 +43,10 @@ class OwnerRegistrationView(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        # Return minimal response for faster registration
         return Response({
-            'user': OwnerSerializer(user).data,
-            'message': 'Owner registered successfully'
+            'message': 'Owner registered successfully',
+            'username': user.username
         }, status=status.HTTP_201_CREATED)
 
 

@@ -65,6 +65,7 @@ export default function Register() {
     setLoading(true)
 
     try {
+      // Register user
       await api.post('/api/auth/register/', {
         username: formData.username,
         email: formData.email,
@@ -73,6 +74,7 @@ export default function Register() {
         phone: formData.phone || undefined,
       })
 
+      // Auto-login after registration (optimized)
       const loginResult = await login(formData.username, formData.password)
 
       if (loginResult.success) {
