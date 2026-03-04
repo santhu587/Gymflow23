@@ -128,11 +128,13 @@ In Render, open your service → **“Environment”** tab → **“Add Environm
 | `ALLOWED_HOSTS` | `*.render.com,gymflow-backend.onrender.com` | Replace `gymflow-backend` with your **Render service name** if different. |
 | `CORS_ALLOWED_ORIGINS` | Your frontend URL | e.g. `https://gymflow23.vercel.app` or `https://your-app.vercel.app`. No trailing slash. If frontend not deployed yet, use `http://localhost:5173` and update later. |
 
-### Optional (recommended)
+### Required on Render (avoid Python 3.14 build error)
 
 | Key | Value |
 |-----|--------|
 | `PYTHON_VERSION` | `3.11.9` |
+
+Render may default to Python 3.14, which breaks `djangorestframework-simplejwt` (missing `pkg_resources`). Setting `PYTHON_VERSION=3.11.9` fixes the build.
 
 ### Example (replace with your real values)
 
