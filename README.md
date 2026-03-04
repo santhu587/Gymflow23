@@ -52,8 +52,11 @@ npm run dev
 
 ## Deployment
 
+### Backend to production (complete guide)
+**[BACKEND_PRODUCTION_DEPLOYMENT.md](./BACKEND_PRODUCTION_DEPLOYMENT.md)** — Step-by-step guide to deploy the backend on Render with PostgreSQL (Supabase or Neon): database setup, env vars, build/start commands, admin user, and troubleshooting.
+
 ### Option 1: Render + Supabase/Neon (Recommended)
-See [RENDER_SUPABASE_DEPLOYMENT.md](./RENDER_SUPABASE_DEPLOYMENT.md) for detailed deployment instructions:
+See [RENDER_SUPABASE_DEPLOYMENT.md](./RENDER_SUPABASE_DEPLOYMENT.md) for more deployment details:
 - **Frontend:** Vercel
 - **Backend:** Render
 - **Database:** Supabase PostgreSQL or Neon PostgreSQL

@@ -79,9 +79,15 @@ WSGI_APPLICATION = 'gym_management.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 # Database configuration - supports PostgreSQL (via DATABASE_URL), MySQL (local dev), and SQLite (fallback)
-import dj_database_url
-
 DATABASE_URL = config('DATABASE_URL', default=None)
+
+# Production (e.g. Render): require DATABASE_URL so we don't use SQLite on ephemeral disk
+if not DEBUG and not DATABASE_URL:
+    raise ValueError(
+        "DATABASE_URL must be set in production (e.g. on Render). "
+        "Add it in Render Dashboard → Your Service → Environment. "
+        "Use Supabase or Neon PostgreSQL and set DATABASE_URL to the connection string."
+    )
 
 if DATABASE_URL:
     # Production: Use PostgreSQL/MySQL from DATABASE_URL (Render, Railway, Supabase, Neon, etc.)
@@ -90,6 +96,11 @@ if DATABASE_URL:
     db_config['CONN_MAX_AGE'] = 600  # Keep connections alive for 10 minutes
     db_config['OPTIONS'] = db_config.get('OPTIONS', {})
     db_config['OPTIONS']['connect_timeout'] = 10  # 10 second connection timeout
+    # Supabase/Neon require SSL; ensure sslmode is set if not already in URL
+    if db_config.get('ENGINE') == 'django.db.backends.postgresql':
+        db_config.setdefault('OPTIONS', {})
+        if 'sslmode' not in db_config['OPTIONS'] and 'sslmode' not in (DATABASE_URL or ''):
+            db_config['OPTIONS']['sslmode'] = 'require'
     DATABASES = {
         'default': db_config
     }

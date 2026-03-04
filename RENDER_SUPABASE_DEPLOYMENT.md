@@ -225,34 +225,47 @@ https://your-service-name.onrender.com/api/
 
 ## Troubleshooting
 
-### Issue 1: Build Fails - "ModuleNotFoundError: No module named 'pkg_resources'"
+### Issue 1: "DATABASE_URL must be set in production"
+**Solution:** You must set the `DATABASE_URL` environment variable on Render.
+1. Render Dashboard → your **Web Service** → **Environment**
+2. Add variable: **Key** `DATABASE_URL`, **Value** = your Supabase or Neon connection string
+3. Redeploy. Do not leave DATABASE_URL blank in production.
+
+### Issue 2: Build Fails - "ModuleNotFoundError: No module named 'pkg_resources'"
 **Solution:**
 - Make sure `setuptools>=65.5.0` is in `requirements.txt` ✅ (already added)
 
-### Issue 2: Database Connection Error
+### Issue 3: Database Connection Error (backend "database not working")
 **Solution:**
-1. Check `DATABASE_URL` is correct
-2. Verify password doesn't have special characters (URL encode if needed)
-3. For Supabase: Make sure you replaced `[YOUR-PASSWORD]` in connection string
-4. For Neon: Connection string should include `?sslmode=require`
+1. **Set DATABASE_URL on Render:** Environment → add `DATABASE_URL` with your full connection string.
+2. **Supabase:** Use URI from Project Settings → Database. Replace `[YOUR-PASSWORD]` with your real password. Example:
+   ```
+   postgresql://postgres:YOUR_PASSWORD@db.xxxxx.supabase.co:5432/postgres
+   ```
+3. **Neon:** Use the connection string from the dashboard; it should include `?sslmode=require`. Example:
+   ```
+   postgresql://user:password@ep-xxxxx.region.aws.neon.tech/neondb?sslmode=require
+   ```
+4. **Special characters in password:** If your DB password has `@`, `#`, `/`, etc., URL-encode it (e.g. `@` → `%40`) in the connection string.
+5. **Check Render Logs:** After deploy, open **Logs** and look for migration lines like `Applying ... OK`. If you see `connection refused` or `SSL required`, fix the URL and redeploy.
 
-### Issue 3: Migration Errors
+### Issue 5: Migration Errors
 **Solution:**
 - If you see `InconsistentMigrationHistory`:
   - This is a fresh database, so it shouldn't happen
   - If it does, you can reset migrations (see below)
 
-### Issue 4: Static Files Not Loading
+### Issue 6: Static Files Not Loading
 **Solution:**
 - Make sure `whitenoise` is in `requirements.txt` ✅ (already added)
 - Check `collectstatic` runs in build command ✅ (already added)
 
-### Issue 5: CORS Errors
+### Issue 7: CORS Errors
 **Solution:**
 - Update `CORS_ALLOWED_ORIGINS` with your frontend URL
 - Make sure frontend URL is exact (no trailing slash)
 
-### Issue 6: Service Keeps Crashing
+### Issue 8: Service Keeps Crashing
 **Solution:**
 1. Check logs for error messages
 2. Verify all environment variables are set
