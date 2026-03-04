@@ -224,13 +224,15 @@ Use these for:
 
 1. Deploy your frontend (e.g. Vercel) and set **one** environment variable there:
    - **Name:** `VITE_API_URL`
-   - **Value:** `https://gymflow-backend.onrender.com`  
-     (no `/api`, no trailing slash; replace with your Render URL.)
+   - **Value:** `https://gymflow23-1.onrender.com`  
+     (no `/api`, no trailing slash; use your actual Render backend URL.)
 2. Redeploy the frontend so it picks up `VITE_API_URL`.
 3. On Render, ensure **CORS** includes your frontend:
    - **Key:** `CORS_ALLOWED_ORIGINS`
    - **Value:** `https://your-actual-frontend.vercel.app` (exact URL, no trailing slash).
 4. Redeploy the backend if you changed `CORS_ALLOWED_ORIGINS`.
+
+See **FRONTEND_PRODUCTION_UPDATE.md** for step-by-step frontend update with your live backend URL.
 
 ---
 
