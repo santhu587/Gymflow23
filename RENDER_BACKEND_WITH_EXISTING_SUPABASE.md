@@ -32,8 +32,8 @@ You have **Supabase resumed and healthy**. Follow these steps to create the **ba
 | **Branch** | `main` |
 | **Root Directory** | `backend` |
 | **Runtime** | `Python 3` |
-| **Build Command** | `pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate` |
-| **Start Command** | `gunicorn gym_management.wsgi:application --bind 0.0.0.0:$PORT` |
+| **Build Command** | `pip install -r requirements.txt && python manage.py collectstatic --noinput` |
+| **Start Command** | `python manage.py migrate --noinput && gunicorn gym_management.wsgi:application --bind 0.0.0.0:$PORT` |
 
 5. Leave **Auto-Deploy** as **Yes** if you want deploys on every push.
 

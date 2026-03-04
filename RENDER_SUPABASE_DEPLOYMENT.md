@@ -117,11 +117,11 @@ Choose one: **Supabase** or **Neon**
 - **Runtime:** `Python 3`
 - **Build Command:**
   ```bash
-  pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
+  pip install -r requirements.txt && python manage.py collectstatic --noinput
   ```
-- **Start Command:**
+- **Start Command:** (migrations run at startup so the service can reach Supabase/Neon)
   ```bash
-  gunicorn gym_management.wsgi:application --bind 0.0.0.0:$PORT
+  python manage.py migrate --noinput && gunicorn gym_management.wsgi:application --bind 0.0.0.0:$PORT
   ```
 
 **Advanced Settings:**

@@ -101,9 +101,11 @@ postgresql://postgres:MyStr0ngP@ss@db.abcdefghijk.supabase.co:5432/postgres
 |-------|--------|
 | **Runtime** | `Python 3` |
 | **Build Command** | (copy exactly) |
-| | `pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate` |
+| | `pip install -r requirements.txt && python manage.py collectstatic --noinput` |
 | **Start Command** | (copy exactly) |
-| | `gunicorn gym_management.wsgi:application --bind 0.0.0.0:$PORT` |
+| | `python manage.py migrate --noinput && gunicorn gym_management.wsgi:application --bind 0.0.0.0:$PORT` |
+
+**Why migrations are in Start, not Build:** Render's build environment often cannot reach external databases (Supabase/Neon), so running `migrate` during build can fail with "Network is unreachable". Running `migrate` at startup ensures the running container (which has network access) applies migrations before Gunicorn starts.
 
 ### Optional
 
@@ -306,13 +308,13 @@ Example: `https://gymflow-backend.onrender.com`
 **Build:**
 
 ```bash
-pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
+pip install -r requirements.txt && python manage.py collectstatic --noinput
 ```
 
 **Start:**
 
 ```bash
-gunicorn gym_management.wsgi:application --bind 0.0.0.0:$PORT
+python manage.py migrate --noinput && gunicorn gym_management.wsgi:application --bind 0.0.0.0:$PORT
 ```
 
 ---
