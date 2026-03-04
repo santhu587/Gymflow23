@@ -1,0 +1,24 @@
+---
+description: Commit code changes to git after each edit or batch of related edits
+alwaysApply: true
+---
+
+# Git: Commit After Code Changes
+
+When you make code or config changes in this project:
+
+1. **After each logical change** (or small batch of related edits), commit to git.
+2. **Stage** the changed files: `git add <files>` or `git add -A` for all.
+3. **Commit** with a clear message: `git commit -m "Short description of what changed"`.
+4. **Push** when the user is done or when it makes sense: `git push origin main`.
+
+Do not leave uncommitted changes at the end of a task unless the user asks to. Prefer one commit per logical change (e.g. "Add Python 3.11 pin for Render") rather than one giant commit at the end.
+
+**Skip committing when:**
+- The user explicitly says not to commit.
+- Only documentation or notes were discussed (no file edits).
+- Changes are in ignored files (e.g. `.env`, `venv/`) or local-only.
+
+**Do not commit:**
+- Secrets, `.env` with real credentials, or `node_modules/`.
+- Files listed in `.gitignore`.
